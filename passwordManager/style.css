@@ -1,0 +1,90 @@
+*{
+    font-size: 20px;
+    border: 0;
+    margin: 0;
+}
+
+body{
+    color: rgba(255, 255, 255, 0.85);
+    font-family: Arial;
+    /* background-image: linear-gradient(0deg, rgb(46, 46, 46) 0%, rgb(46, 46, 46) 7%,rgb(55, 55, 55) 7%, rgb(55, 55, 55) 17%,rgb(63, 63, 63) 17%, rgb(63, 63, 63) 40%,rgb(72, 72, 72) 40%, rgb(72, 72, 72) 42%,rgb(80, 80, 80) 42%, rgb(80, 80, 80) 56%,rgb(89, 89, 89) 56%, rgb(89, 89, 89) 63%,rgb(97, 97, 97) 63%, rgb(97, 97, 97) 100%),linear-gradient(90deg, rgb(46, 46, 46) 0%, rgb(46, 46, 46) 7%,rgb(55, 55, 55) 7%, rgb(55, 55, 55) 17%,rgb(63, 63, 63) 17%, rgb(63, 63, 63) 40%,rgb(72, 72, 72) 40%, rgb(72, 72, 72) 42%,rgb(80, 80, 80) 42%, rgb(80, 80, 80) 56%,rgb(89, 89, 89) 56%, rgb(89, 89, 89) 63%,rgb(97, 97, 97) 63%, rgb(97, 97, 97) 100%),linear-gradient(22.5deg, rgb(46, 46, 46) 0%, rgb(46, 46, 46) 7%,rgb(55, 55, 55) 7%, rgb(55, 55, 55) 17%,rgb(63, 63, 63) 17%, rgb(63, 63, 63) 40%,rgb(72, 72, 72) 40%, rgb(72, 72, 72) 42%,rgb(80, 80, 80) 42%, rgb(80, 80, 80) 56%,rgb(89, 89, 89) 56%, rgb(89, 89, 89) 63%,rgb(97, 97, 97) 63%, rgb(97, 97, 97) 100%),linear-gradient(90deg, rgb(5,0,0),rgb(118,0,172)); background-blend-mode:overlay,overlay,overlay,normal; */
+    background-image: url('./wall.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+/* --------------------------------------------- */
+.inputbox{
+    padding: 40px;
+}
+.inputbox input,
+.inputbox select,
+.inputbox button{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 7px;
+    color: white;
+}
+.inputbox input:focus,
+.inputbox select:focus{
+    outline: none;
+}
+.inputbox button:hover{cursor: pointer;}
+.inputbox button:active{
+    transform: scale(1.1);
+}
+
+
+
+
+
+/* --------------------------------------------- */
+.displaybox{
+    display: flex;
+}
+
+.displaybox .listbox{
+    width: 60vw;
+    overflow-y: auto;
+    /* border-right: 1px solid white; */
+}
+.displaybox .listbox .accounts:hover{
+    background-image: linear-gradient(90deg, rgba(89,124,238, 0),rgba(238,203,89, 0),rgba(255, 255, 255, 0.25),rgba(255, 255, 255, 0.35),rgba(255, 255, 255, 0.75));
+}
+.displaybox .listbox .accounts{
+    display: flex;
+    padding: 10px 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+.accounts button:hover{
+    cursor: pointer;
+}
+.accounts button{
+    background-color: transparent;
+    border: none;
+}
+
+.displaybox .detailbox{
+    /* border: 1px solid white; */
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+
+}
+.displaybox .box{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* border: 1px solid white; */
+    border-radius: 15px;
+    padding: 35px;
+    background-color: rgba(255, 255, 255, 0.13);
+}
+    
+.displaybox .detailbox .details{
+    display: flex;
+    gap: 30px
+}
