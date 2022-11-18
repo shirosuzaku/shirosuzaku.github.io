@@ -1,0 +1,170 @@
+*{
+    font-size: 20px;
+    border: 0;
+    margin: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #292C3B;
+    color: #E8E8FF;
+    font-family: Arial;
+}
+
+/* ------------------------------------------------------  MAIN  */
+.main{
+    /* background-image: url('./vecteezy_abstract_flat_solid_colors_background_DP1020_vecteezy_abstract_flat_solid_colors_background_DP1020.jpg'); */
+    background-image: url('./wall.png');
+    background-size: cover;
+    display: grid;
+    grid-template-rows: 160px auto auto auto 160px;
+    
+}
+/* ------------------------------------------------------  HEADER  */
+
+.header{
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.header a{
+    font-size: 30px;
+    text-decoration: none;
+    color: #E8E8FF;
+}
+
+/* ------------------------------------------------------  INTRO  */
+
+.introduction{
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    padding: 100px 150px;
+    justify-content: space-between;
+    /* gap: 100px; */
+}
+.introduction .greeting{
+    max-width: 50vw;
+}
+
+.introduction .greeting h1{
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+.introduction .greeting p{
+    font-size: 30px;
+}
+
+.introduction .profile {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.introduction .profile .pfp{
+    width: 300px;
+    height: 360px;
+    background-image: url('./profile.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ------------------------------------------------------  PROJECT  */
+.project{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 200px;
+    gap: 150px;
+}
+
+.project h1{
+    font-size: 30px;
+}
+
+.project .focus{
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 68px;
+    width: 90%;
+    padding: 120px 60px 50px 60px;
+}
+
+/* ------------------------------------------------------  SKILLS  */
+
+.skills{
+    padding: 50px 125px;
+}
+.skills .backdrop{
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    gap: 50px;
+}
+.skills .backdrop h1{
+    font-size: 30px;
+}
+.skills .backdrop .skillList{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.skills .backdrop .skillList .ski{
+    display: grid;
+    grid-template-columns: 200px auto ;
+    align-items: center;
+}
+.skills .backdrop .skillList .ski .skimg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E8E8FF;
+    border-width: 0 1px 0 0 ;
+    padding: 0 20px 0 0;
+}
+.skills .backdrop .skillList .ski p{
+    padding: 10px 20px 10px 40px;
+}
+
+
+
+/* ------------------------------------------------------  FOOTER  */
+
+.footer{
+    background-color: #242632;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+.footer .list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.footer .list .info{
+    display: flex;
+    gap: 20px;
+    font-size: 20px
+}
+.footer .list .info a{
+    color: white;
+}
+
+.phone,.email,.git{
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+}
+.phone{
+    background-image: url('./phone.png');
+}
+.email{
+    background-image: url('./emailedit.png');
+}
+.git{
+    background-image: url('./gitedit.png');
+}
