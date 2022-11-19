@@ -15,8 +15,9 @@ body{
 /* ------------------------------------------------------  MAIN  */
 .main{
     /* background-image: url('./vecteezy_abstract_flat_solid_colors_background_DP1020_vecteezy_abstract_flat_solid_colors_background_DP1020.jpg'); */
-    background-image: url('./wall.png');
+    background-image: url('./wall.jpg');
     background-size: cover;
+    overflow-x: hidden;
     display: grid;
     grid-template-rows: 160px auto auto auto 160px;
     
@@ -40,9 +41,9 @@ body{
 .introduction{
     background-color: rgba(0, 0, 0, 0.45);
     display: flex;
-    padding: 100px 150px;
+    padding: 100px 100px;
     justify-content: space-between;
-    /* gap: 100px; */
+    gap: 50px;
 }
 .introduction .greeting{
     max-width: 50vw;
@@ -75,7 +76,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 200px;
+    padding: 50px 100px;
     gap: 150px;
 }
 
@@ -85,11 +86,76 @@ body{
 
 .project .focus{
     position: relative;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 68px;
     width: 90%;
-    padding: 120px 60px 50px 60px;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding:  50px 50px;
+    transition: height 1s;
 }
+
+.project .focus .proj{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+}
+.project .focus .proj.active{
+    display: grid;
+}
+.project .focus .proj.off{
+    display: none;
+}
+
+.project .focus .proj h1{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    padding: 0 0 50px 0;
+}
+
+.project .focus .proj p{
+    padding: 0 0px 0 0 ;
+}
+
+.project .focus .proj .projectImgs{
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    gap: 40px;
+    justify-content: center;
+}
+
+.project .focus .proj .projectImgs img{
+    width: 200px;
+    height: 200px;
+}
+
+.project .focus .nextprev{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0 0 0;
+    gap: 80px;
+}
+.project .focus .nextprev .next,
+.project .focus .nextprev .prev{
+    color: #E8E8FF;
+    background-color: transparent;
+    border: #E8E8FF solid 1px;
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+    text-align: center;
+    /* padding: 20px; */
+    
+}
+.project .focus .nextprev .next:hover,
+.project .focus .nextprev .prev:hover{
+    cursor: pointer;
+    color: black;
+    background-color: #E8E8FF;
+}
+
+
 
 /* ------------------------------------------------------  SKILLS  */
 
