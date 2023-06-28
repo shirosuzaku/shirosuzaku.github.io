@@ -4,6 +4,10 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+html{
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
 
 .canvas-container {
 	z-index: 1;
@@ -19,20 +23,128 @@ html, body {
 	z-index: 2;
 }
 
+section{
+    height: 100vh;
+    scroll-snap-align: start;
+}
+
 /* --- nav --- */
 .nav{
   position: fixed;
   height: 50vh;
   top: 25%;
-  right: 0;
+  right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+.nav button{
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: hsl(0, 0%, 50%);
+    border-radius: 50%;
+}
+.nav button:hover{
+    cursor: pointer;
+    background-color: hsl(0, 0%, 20%);
+
+}
 
 
 /* --- home --- */
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.home p{
+    margin-bottom: 20vh;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+
 /* --- aea --- */
+.aea{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.aea-holder{
+    width: 50vw;
+    margin-right: 10vw;
+}
+.aea-holder h2{
+    font-size: 50px;
+}
+.aea-holder p{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+
 /* --- missoin --- */
+.mission{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.mission-holder{
+    width: 50vw;
+    margin-left: 10vw;
+}
+.mission-holder h2{
+    font-size: 50px;
+}
+.mission-holder p{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+
+
 /* --- collab --- */
+.collab{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.collab-holder{
+    width: 30vw;
+    margin-left: 10vw;
+    margin-top: 10vh;
+}
+.collab-holder h2{
+    font-size: 50px;
+}
+.collab-holder p{
+    font-size: 18px;
+    font-weight: 600;
+}
 /* --- contact --- */
+.contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-holder{
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    justify-content: space-between;
+}
+.contact-holder .imgsvg{
+    height: 300px;
+    width: 100%;
+    background-color: #222;
+}
+.contact-holder .contact-grid{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    
+}
