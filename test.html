@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <p>Alpha :</p><p id="apha"></p>
+    <p>beta :</p><p id="beta"></p>
+    <p>gamma :</p><p id="gamma"></p>
+    <div class="slide">
+        <div id="ball" class="ball"></div>
+    </div>
+    <script>
+      const al = document.getElementById("apha")
+const be = document.getElementById("beta")
+const ga = document.getElementById("gamma")
+const ball = document.getElementById("ball")
+
+window.addEventListener('deviceorientation',e=>{
+    let alp = larp(0,360,0,100,e.alpha)
+    let bep = larp(0,360,0,100,e.beta)
+    let gap = larp(0,360,0,100,e.gamma)
+    ball.style.left = `${larp(-360,360,0,100,gap)}%`
+    ball.style.top = `${larp(-360,360,0,100,bep)}%`
+
+    al.innerHTML = ` ${e.alpha} `
+    be.innerHTML = ` ${e.beta} `
+    ga.innerHTML = ` ${e.gamma} `
+})
+
+
+const larp = (OldMin,OldMax,NewMin,NewMax,OldValue) => {
+    let OldRange,NewRange,NewValue
+    OldRange = (OldMax - OldMin)
+    NewRange = (NewMax - NewMin)
+    NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+    return NewValue
+}
+
+const invLerp = (min,max,val) => {
+    return (val - min) / (max - min)
+}
+</script>
+</body>
+</html>
