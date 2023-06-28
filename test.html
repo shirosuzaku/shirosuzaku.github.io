@@ -39,8 +39,8 @@ window.addEventListener('deviceorientation',e=>{
     let alp = larp(0,360,0,100,e.alpha)
     let bep = larp(0,360,0,100,e.beta)
     let gap = larp(0,360,0,100,e.gamma)
-    ball.style.left = `${larp(-360,360,0,100,gap)}%`
-    ball.style.top = `${larp(-360,360,0,100,bep)}%`
+    ball.style.left = `${larp(-50,50,0,100,gap)}%`
+    ball.style.top = `${larp(-50,50,0,100,bep)}%`
 
     al.innerHTML = ` ${e.alpha} `
     be.innerHTML = ` ${e.beta} `
