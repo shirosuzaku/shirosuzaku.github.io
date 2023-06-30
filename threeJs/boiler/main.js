@@ -1,5 +1,6 @@
 import './style.css'
 console.clear();
+console.log("main");
 
 import * as THREE from  "three";
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
