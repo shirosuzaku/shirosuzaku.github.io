@@ -2,16 +2,13 @@ import './style.css'
 console.clear();
 
 import * as THREE from  "three";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
-gsap.registerPlugin(ScrollTrigger);
+import {TrackballControls} from 'three/examples/jsm/controls/TrackballControls'
 
 // --- CONSTS
 
 const COLORS = {
-	background: '#66aa66',
+	background: '#ffffff',
 	light: '#ffffff',
 	sky: '#aaaaff',
 	ground: '#115511'
@@ -25,7 +22,6 @@ let size = { width: 0, height: 0 }
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(COLORS.background);
-scene.fog = new THREE.Fog(COLORS.background, 15, 20);
 
 // --- RENDERER
 
@@ -36,8 +32,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.physicallyCorrectLights = true;
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 5;
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const container = document.querySelector('.canvas-container');
 container.appendChild( renderer.domElement );
@@ -45,37 +39,76 @@ container.appendChild( renderer.domElement );
 // --- CAMERA
 
 const camera = new THREE.PerspectiveCamera(40, size.width / size.height, 0.1, 100);
-camera.position.set(5, 5, 0);
+camera.position.set(0, 0, 15);
 let cameraTarget = new THREE.Vector3(0, 1, 0);
 
 scene.add(camera);
 
+const controls = new TrackballControls(camera,renderer.domElement)
+controls.enableDamping = true
+controls.dampingFactor = 0.05
+// controls.enabledZoom = false
+
+
+
 // --- LIGHTS
-
-const directionalLight = new THREE.DirectionalLight(COLORS.light, 2);
-directionalLight.castShadow = true;
-directionalLight.shadow.camera.far = 10;
-directionalLight.shadow.mapSize.set(1024, 1024);
-directionalLight.shadow.normalBias = 0.05;
-directionalLight.position.set(2, 5, 3);
-
-
-
-scene.add(directionalLight);
-
-const hemisphereLight = new THREE.HemisphereLight( COLORS.sky, COLORS.ground, 0.5 );
-scene.add(hemisphereLight)
 
 
 // --- FLOOR
 
-const plane = new THREE.PlaneGeometry(100, 100);
-const floorMaterial = new THREE.MeshStandardMaterial({ color: COLORS.ground })
-const floor = new THREE.Mesh(plane, floorMaterial);
-floor.receiveShadow = true;
-floor.rotateX(-Math.PI * 0.5)
+// --- 3d logo
+const logoParent = new THREE.Object3D()
+const logoFaceGeo = new THREE.PlaneGeometry(1,1)
+const logoFaceMat = new THREE.MeshBasicMaterial({
+  color: 0x000000
+})
+const logoFace = new THREE.Mesh(logoFaceGeo,logoFaceMat)
 
-scene.add(floor);
+const createFaces = (x = 0,y=0,z=0,rx=0,ry=0,rz=0) => {
+  const logoFaceClone = logoFace.clone()
+
+  logoFaceClone.position.set(x,y,z)
+  logoFaceClone.rotateX(rx)
+  logoFaceClone.rotateY(ry)
+  logoFaceClone.rotateZ(rz)
+
+  logoParent.add(logoFaceClone)
+}
+// top
+createFaces(1,1.5,1,-0.5 * Math.PI)
+createFaces(-1,1.5,1,-0.5 * Math.PI)
+createFaces(1,1.5,-1,-0.5 * Math.PI)
+createFaces(-1,1.5,-1,-0.5 * Math.PI)
+// bottom
+createFaces(1,-1.5,1, 0.5 * Math.PI)
+createFaces(-1,-1.5,1, 0.5 * Math.PI)
+createFaces(1,-1.5,-1, 0.5 * Math.PI)
+createFaces(-1,-1.5,-1, 0.5 * Math.PI)
+// front
+createFaces(1,1,1.5)
+createFaces(-1,1,1.5)
+createFaces(1,-1,1.5)
+createFaces(-1,-1,1.5)
+// back
+createFaces(1,1,-1.5,0, Math.PI)
+createFaces(-1,1,-1.5,0, Math.PI)
+createFaces(1,-1,-1.5,0, Math.PI)
+createFaces(-1,-1,-1.5,0, Math.PI)
+// left
+createFaces(-1.5,1,1,  0, -0.5 * Math.PI)
+createFaces(-1.5,-1,1,  0, -0.5 * Math.PI)
+createFaces(-1.5,1,-1,  0, -0.5 * Math.PI)
+createFaces(-1.5,-1,-1,  0, -0.5 * Math.PI)
+// right
+createFaces(1.5,1,1,  0, 0.5 * Math.PI)
+createFaces(1.5,-1,1,  0, 0.5 * Math.PI)
+createFaces(1.5,1,-1,  0, 0.5 * Math.PI)
+createFaces(1.5,-1,-1,  0, 0.5 * Math.PI)
+
+
+
+logoParent.position.set(0,1.5,0)
+scene.add(logoParent)
 
 // --- ON RESIZE
 
@@ -95,91 +128,58 @@ onResize();
 
 
 // --- HELPERS
-
+const ghelp = new THREE.GridHelper(5,5)
+// scene.add(ghelp)
 
 // --- 3d models
-const loader = new GLTFLoader()
-let bananamixer,clips,clip,man,acrobatAction
-loader.load('./modles/bananamodel/scene.gltf',function(bman){
-  man = bman.scene
-  bananamixer = new THREE.AnimationMixer(man)
-  clips = bman.animations
-  man.traverse(child => {
-    if(child instanceof THREE.Mesh){
-      child.receiveShadow = true
-      child.castShadow = true
-    }
-  })
-  scene.add(man)
-  clip = THREE.AnimationClip.findByName(clips,'Emote Acrobatic Superhero')
-  acrobatAction = bananamixer.clipAction(clip)
-  acrobatAction.setLoop(THREE.LoopOnce)
-  acrobatAction.clampWhenFinished = true
-  acrobatAction.enabled = true
-})
-
-
-let yu = false;
-const barelroll = () => {
-  acrobatAction.reset()
-  acrobatAction.play()
-  yu = true
-}
-document.querySelector('.btn').addEventListener('click',barelroll)
-
 
 // --- SCROLL TRIGERR
-const btop = document.getElementById('bordert')
-const bbottom = document.getElementById('borderb')
-
-gsap.to(btop,{
-  scrollTrigger:{
-    trigger: ".sec1",
-    start: "center center",
-    end: "bottom -=100",
-    toggleActions: "play pause pause pause",
-    scrub: true
-  },
-  height: 100,
-  duration: 1
-})
-gsap.to(bbottom,{
-  scrollTrigger:{
-    trigger: ".sec1",
-    start: "center center",
-    end: "bottom -=100",
-    toggleActions: "play pause pause pause",
-    scrub: true
-  },
-  height: 100,
-  duration: 1
-})
-gsap.to(camera.position,{
-  scrollTrigger:{
-    trigger: ".sec1",
-    start: "center center",
-    end: "bottom -=100",
-    toggleActions: "play pause pause pause",
-    scrub: true
-  },
-  x: 0,
-  y: 1,
-  z: 5,
-  duration: 2
-})
 
 // --- TICK
-// const controls = new OrbitControls(camera,renderer.domElement)
-const clock = new THREE.Clock()
+let rotateOn = true
 const tick = () => {
     camera.lookAt(cameraTarget);
     renderer.render(scene, camera);
-    if(yu){
-      bananamixer.update(clock.getDelta())
 
-    }
-    // controls.update()
+	logoParent.rotateX(0.002)
+	logoParent.rotateY(0.005)
+	logoParent.rotateZ(0.004)
+
+
+    controls.update()
+    
     window.requestAnimationFrame(() => tick())
 }
 
 tick();
+
+// Event Handlers
+let mouseisdown = false
+window.addEventListener('mousemove',e=>{
+   if(!mouseisdown){
+     let camx = larp(0,window.innerWidth,-0.5,0.5,e.clientX)
+     let camy = larp(0,window.innerHeight,-0.5,0.5,e.clientY)
+     console.log(camx,camy)
+     logoParent.position.x = camx
+     logoParent.position.y = 1.5 + -camy
+   }
+})
+
+window.addEventListener('scroll',e=>{
+  // alert('s')
+})
+
+// window.addEventListener('mousedown',e=>{
+//   mouseisdown = true
+// })
+// window.addEventListener('mouseup',e=>{
+//   mouseisdown = false
+// })
+
+const larp = (OldMin,OldMax,NewMin,NewMax,OldValue) =>{
+  let OldRange = (OldMax - OldMin)  
+  let NewRange = (NewMax - NewMin)  
+  let NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin
+  return NewValue
+}
+
