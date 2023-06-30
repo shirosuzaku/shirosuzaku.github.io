@@ -2,9 +2,9 @@ import './style.css'
 console.clear();
 console.log("main : ",window.location.pathname);
 
-import * as THREE from  "/three";
-import {OrbitControls} from '/three/examples/jsm/controls/OrbitControls'
-import {TrackballControls} from '/three/examples/jsm/controls/TrackballControls'
+import * as THREE from  "/threeJs/boiler/three";
+import {OrbitControls} from '/threeJs/boiler/three/examples/jsm/controls/OrbitControls'
+import {TrackballControls} from '/threeJs/boiler/three/examples/jsm/controls/TrackballControls'
 
 // --- CONSTS
 
