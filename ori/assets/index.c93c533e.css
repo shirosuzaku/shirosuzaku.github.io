@@ -1,0 +1,1 @@
+*{padding:0;margin:0}#bg{position:fixed;top:0;left:0;z-index:-40}html{scroll-snap-type:y mandatory}main{z-index:40;width:100%}section{height:100vh;scroll-snap-align:start}
